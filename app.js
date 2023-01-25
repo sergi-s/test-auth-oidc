@@ -75,14 +75,20 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
     })(req, res, next);
   });
 
-  // authentication callback
-  app.get("/auth/google/callback", (req, res, next) => {
-    console.log("authentication callback")
-    passport.authenticate("oidc", {
-      successRedirect: "/users",
-      failureRedirect: "/",
-    })(req, res, next);
+  app.post("/oauth/login", (req, res, next) => {
+    console.log(req.body);
+    res.send({ msg: "wmalo" });
   });
+
+  // authentication callback
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/auth/google" }),
+    (req, res) => {
+      console.log("????????????????");
+      res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
+    }
+  );
 
   app.use("/users", usersRouter);
 
