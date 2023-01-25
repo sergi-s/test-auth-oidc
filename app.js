@@ -69,18 +69,13 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
     done(null, user);
   });
 
-  // // start authentication request
-  // app.get("/auth", (req, res, next) => {
-  //   passport.authenticate("oidc", {
-  //     // scope: ["profile", "email"],
-  //     acr_values: "urn:grn:authn:no:email",
-  //   })(req, res, next);
-  // });
-
-  // app.post("/oauth/login", (req, res, next) => {
-  //   console.log(req.body);
-  //   res.send({ msg: "wmalo" });
-  // });
+  // start authentication request
+  app.get("/auth", (req, res, next) => {
+    passport.authenticate("oidc", {
+      // scope: ["profile", "email"],
+      acr_values: "urn:grn:authn:no:email",
+    })(req, res, next);
+  });
 
   // authentication callback
   app.get(
@@ -93,12 +88,12 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
   );
 
    // authentication callback
-   app.get('/auth/callback', (req, res, next) => {
-    passport.authenticate('oidc', {
-      successRedirect: '/users',
-      failureRedirect: '/'
-    })(req, res, next);
-  });
+  //  app.get('/auth/callback', (req, res, next) => {
+  //   passport.authenticate('oidc', {
+  //     successRedirect: '/users',
+  //     failureRedirect: '/'
+  //   })(req, res, next);
+  // });
 
   app.use("/users", usersRouter);
 
