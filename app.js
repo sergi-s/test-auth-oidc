@@ -29,8 +29,10 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
     client_id:
       "117044214125-l56kea9r6mqef29b9c29uhf8hk02c9pa.apps.googleusercontent.com",
     client_secret: "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",
-    redirect_uris: ["http://localhost:5000/auth/google/callback"],
-    post_logout_redirect_uris: ["http://localhost:5000/logout/callback"],
+    // redirect_uris: ["http://localhost:5000/auth/google/callback"],
+    redirect_uris: ["https://oidc.techhive.dev/auth/google/callback"],
+    // post_logout_redirect_uris: ["http://localhost:5000/logout/callback"],
+    post_logout_redirect_uris: ["https://oidc.techhive.dev/logout/callback"],
     token_endpoint_auth_method: "client_secret_post",
   });
   // new criiptoIssuer.Client({
