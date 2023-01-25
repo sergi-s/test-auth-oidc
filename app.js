@@ -87,11 +87,11 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
       console.log({
         sad: "????????????????",
         msg: `OAuthLogin://login?user=${JSON.stringify(req.user)}`,
-        msg2: `memcaps://app/login?firstName=${req.user.firstName}/lastName=${req.user.lastName}/email=${req.user.email}`,
+        msg2: `exp://app?user=${JSON.stringify(req.user)}`,
       });
       // res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
       res.redirect(
-        `memcaps://app/login?firstName=${req.user.firstName}/lastName=${req.user.lastName}/email=${req.user.email}`
+        `exp://app/login?user=${JSON.stringify(req.user)}`
       );
     }
   );
