@@ -63,9 +63,11 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
 
   // handles serialization and deserialization of authenticated user
   passport.serializeUser(function (user, done) {
+    console.log(user);
     done(null, user);
   });
   passport.deserializeUser(function (user, done) {
+    console.log(user);
     done(null, user);
   });
 
@@ -82,12 +84,15 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
     "/auth/google/callback",
     passport.authenticate("oidc", { failureRedirect: "/auth/google" }),
     (req, res) => {
-      console.log("????????????????");
+      console.log({
+        sad: "????????????????",
+        msg: `OAuthLogin://login?user=${JSON.stringify(req.user)}`,
+      });
       res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
     }
   );
 
-   // authentication callback
+  // authentication callback
   //  app.get('/auth/callback', (req, res, next) => {
   //   passport.authenticate('oidc', {
   //     successRedirect: '/users',
