@@ -69,28 +69,28 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
     done(null, user);
   });
 
-  // start authentication request
-  app.get("/auth", (req, res, next) => {
-    passport.authenticate("oidc", {
-      // scope: ["profile", "email"],
-      acr_values: "urn:grn:authn:no:email",
-    })(req, res, next);
-  });
+  // // start authentication request
+  // app.get("/auth", (req, res, next) => {
+  //   passport.authenticate("oidc", {
+  //     // scope: ["profile", "email"],
+  //     acr_values: "urn:grn:authn:no:email",
+  //   })(req, res, next);
+  // });
 
-  app.post("/oauth/login", (req, res, next) => {
-    console.log(req.body);
-    res.send({ msg: "wmalo" });
-  });
+  // app.post("/oauth/login", (req, res, next) => {
+  //   console.log(req.body);
+  //   res.send({ msg: "wmalo" });
+  // });
 
-  // // authentication callback
-  // app.get(
-  //   "/auth/google/callback",
-  //   passport.authenticate("google", { failureRedirect: "/auth/google" }),
-  //   (req, res) => {
-  //     console.log("????????????????");
-  //     res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
-  //   }
-  // );
+  // authentication callback
+  app.get(
+    "/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/auth/google" }),
+    (req, res) => {
+      console.log("????????????????");
+      res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
+    }
+  );
 
    // authentication callback
    app.get('/auth/callback', (req, res, next) => {
