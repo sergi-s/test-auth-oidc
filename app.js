@@ -80,6 +80,7 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
   });
 
   // authentication callback
+  const mobLink = "exp"
   app.get(
     "/auth/google/callback",
     passport.authenticate("oidc", { failureRedirect: "/auth/google" }),
@@ -87,11 +88,11 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
       console.log({
         sad: "????????????????",
         msg: `OAuthLogin://login?user=${JSON.stringify(req.user)}`,
-        msg2: `exp://app?user=${JSON.stringify(req.user)}`,
+        msg2: `${mobLink}://?user=${JSON.stringify(req.user)}`,
       });
       // res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
       res.redirect(
-        `exp://app/login?user=${JSON.stringify(req.user)}`
+        `${mobLink}://?user=${JSON.stringify(req.user)}`
       );
     }
   );
