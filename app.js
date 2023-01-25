@@ -80,7 +80,7 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
   // authentication callback
   app.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/auth/google" }),
+    passport.authenticate("oidc", { failureRedirect: "/auth/google" }),
     (req, res) => {
       console.log("????????????????");
       res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
