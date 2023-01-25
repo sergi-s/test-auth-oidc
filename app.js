@@ -88,7 +88,10 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
         sad: "????????????????",
         msg: `OAuthLogin://login?user=${JSON.stringify(req.user)}`,
       });
-      res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
+      // res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
+      res.redirect(
+        `memcaps://app/login?firstName=${req.user.firstName}/lastName=${req.user.lastName}/email=${req.user.email}`
+      );
     }
   );
 
