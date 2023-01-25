@@ -82,15 +82,23 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
     res.send({ msg: "wmalo" });
   });
 
-  // authentication callback
-  app.get(
-    "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/auth/google" }),
-    (req, res) => {
-      console.log("????????????????");
-      res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
-    }
-  );
+  // // authentication callback
+  // app.get(
+  //   "/auth/google/callback",
+  //   passport.authenticate("google", { failureRedirect: "/auth/google" }),
+  //   (req, res) => {
+  //     console.log("????????????????");
+  //     res.redirect("OAuthLogin://login?user=" + JSON.stringify(req.user));
+  //   }
+  // );
+
+   // authentication callback
+   app.get('/auth/callback', (req, res, next) => {
+    passport.authenticate('oidc', {
+      successRedirect: '/users',
+      failureRedirect: '/'
+    })(req, res, next);
+  });
 
   app.use("/users", usersRouter);
 
