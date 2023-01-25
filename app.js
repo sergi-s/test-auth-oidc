@@ -80,7 +80,7 @@ Issuer.discover("https://accounts.google.com").then((googleIssuer) => {
   });
 
   // authentication callback
-  const mobLink = "exp"
+  const mobLink = "reactNative"
   app.get(
     "/auth/google/callback",
     passport.authenticate("oidc", { failureRedirect: "/auth/google" }),
